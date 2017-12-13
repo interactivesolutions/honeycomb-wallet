@@ -1,0 +1,17 @@
+{
+    "name": "interactivesolutions/honeycomb-wallet",
+    "description": "",
+    "keywords": [],
+    "license": "MIT",
+    "authors": [],
+    "repositories": [],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/framework": "5.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "InteractiveSolutions\\HoneycombWallet\\": "src/"
+        }
+    }
+}
