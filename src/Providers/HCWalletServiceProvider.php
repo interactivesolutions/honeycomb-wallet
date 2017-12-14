@@ -94,8 +94,10 @@ class HCWalletServiceProvider extends HCBaseServiceProvider
     protected function registerRoutes(Router $router): void
     {
         $routes = [
+            $this->modulePath('Routes/Admin/02_routes.wallet.history.php'),
             $this->modulePath('Routes/Admin/01_routes.wallet.php'),
 
+            $this->modulePath('Routes/Api/02_routes.wallet.history.php'),
             $this->modulePath('Routes/Api/01_routes.wallet.php'),
         ];
 
