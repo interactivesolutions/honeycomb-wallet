@@ -1,21 +1,40 @@
 {
-    "general":
-    {
+    "general": {
         "serviceProviderNameSpace": "HCWallet"
     },
-    "formData":
-    [
+    "formData": {
+        "wallet": "InteractiveSolutions\\HoneycombWallet\\Forms\\HCWalletForm"
+    },
+    "adminMenu": [
+        {
+            "route": "admin.routes.wallet.index",
+            "translation": "HCWallet::wallet.page_title",
+            "icon": "fa-circle-o",
+            "aclPermission": "interactivesolutions_honeycomb_wallet_routes_wallet_list",
+            "priority": 10
+        }
     ],
-    "adminMenu":
-    [
-    ],
-    "acl":
-    {
-        "permissions" :
-        [
+    "acl": {
+        "permissions": [
+            {
+                "name": "admin.routes.wallet",
+                "controller": "InteractiveSolutions\\HoneycombWallet\\Http\\Controllers\\HCWalletController",
+                "actions": [
+                    "interactivesolutions_honeycomb_wallet_routes_wallet_list",
+                    "interactivesolutions_honeycomb_wallet_routes_wallet_create",
+                    "interactivesolutions_honeycomb_wallet_routes_wallet_update",
+                    "interactivesolutions_honeycomb_wallet_routes_wallet_delete",
+                    "interactivesolutions_honeycomb_wallet_routes_wallet_force_delete"
+                ]
+            }
         ],
-        "rolesActions" :
-        [
-        ]
+        "rolesActions": {
+            "project-admin": [
+                "interactivesolutions_honeycomb_wallet_routes_wallet_list",
+                "interactivesolutions_honeycomb_wallet_routes_wallet_create",
+                "interactivesolutions_honeycomb_wallet_routes_wallet_update",
+                "interactivesolutions_honeycomb_wallet_routes_wallet_delete"
+            ]
+        }
     }
 }

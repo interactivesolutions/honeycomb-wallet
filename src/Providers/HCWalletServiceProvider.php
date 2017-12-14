@@ -29,6 +29,7 @@ declare(strict_types = 1);
 
 namespace InteractiveSolutions\HoneycombWallet\Providers;
 
+use Illuminate\Routing\Router;
 use InteractiveSolutions\HoneycombCore\Providers\HCBaseServiceProvider;
 
 /**
@@ -63,4 +64,54 @@ class HCWalletServiceProvider extends HCBaseServiceProvider
      */
     protected $serviceProviderNameSpace = 'HCWallet';
 
+    /**
+     *
+     */
+    protected function loadViews(): void
+    {
+        $this->loadViewsFrom($this->homeDirectory . '/../resources/views', $this->serviceProviderNameSpace);
+    }
+
+    /**
+     *
+     */
+    protected function loadMigrations(): void
+    {
+        $this->loadMigrationsFrom($this->homeDirectory . '/../database/migrations');
+    }
+
+    /**
+     *
+     */
+    protected function loadTranslations(): void
+    {
+        $this->loadTranslationsFrom($this->homeDirectory . '/../resources/lang', $this->serviceProviderNameSpace);
+    }
+
+    /**
+     * @param Router $router
+     */
+    protected function registerRoutes(Router $router): void
+    {
+        $routes = [
+            $this->modulePath('Routes/Admin/01_routes.wallet.php'),
+
+            $this->modulePath('Routes/Api/01_routes.wallet.php'),
+        ];
+
+        foreach ($routes as $route) {
+            $router->group(['namespace' => $this->namespace], function(Router $router) use ($route) {
+                require $route;
+            });
+        }
+    }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    private function modulePath(string $path): string
+    {
+        return __DIR__ . '/../' . $path;
+    }
 }
