@@ -25,20 +25,22 @@
  * http://www.interactivesolutions.lt
  */
 
-declare(strict_types = 1);
+declare(strict_types =1);
 
-namespace Tests\Unit\Services;
+namespace Tests;
 
-use InteractiveSolutions\HoneycombWallet\Services\HCWalletBalanceService;
-use Tests\TestCase;
 
-class HCWalletBalanceServiceTest extends TestCase
+/**
+ * Class ExampleTest
+ * @package Tests
+ */
+class ExampleTest extends TestCase
 {
     /**
-     * @return HCWalletBalanceService
+     * @test
      */
-    private function getServiceInstance(): HCWalletBalanceService
+    public function it_should_return_true(): void
     {
-        return $this->app->make(HCServiceController::class);
+        $this->assertTrue(true);
     }
 }

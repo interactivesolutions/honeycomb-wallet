@@ -27,18 +27,39 @@
 
 declare(strict_types = 1);
 
-namespace Tests\Unit\Services;
+namespace Tests;
 
-use InteractiveSolutions\HoneycombWallet\Services\HCWalletBalanceService;
-use Tests\TestCase;
 
-class HCWalletBalanceServiceTest extends TestCase
+use Illuminate\Foundation\Application;
+use InteractiveSolutions\HoneycombScripts\app\providers\HCScriptsServiceProvider;
+
+/**
+ * Class TestCase
+ * @package Tests
+ */
+abstract class TestCase extends \Orchestra\Testbench\BrowserKit\TestCase
 {
     /**
-     * @return HCWalletBalanceService
+     *
      */
-    private function getServiceInstance(): HCWalletBalanceService
+    protected function setUp()
     {
-        return $this->app->make(HCServiceController::class);
+        parent::setUp();
+    }
+
+    /**
+     * @param Application $app
+     * @return array
+     */
+    protected function getPackageProviders($app): array
+    {
+        return [
+            HCScriptsServiceProvider::class,
+        ];
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        parent::getEnvironmentSetUp($app);
     }
 }
