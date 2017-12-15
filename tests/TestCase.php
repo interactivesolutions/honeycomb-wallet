@@ -31,7 +31,7 @@ namespace Tests;
 
 
 use Illuminate\Foundation\Application;
-use InteractiveSolutions\HoneycombScripts\app\providers\HCScriptsServiceProvider;
+use InteractiveSolutions\HoneycombWallet\Providers\HCWalletServiceProvider;
 
 /**
  * Class TestCase
@@ -54,7 +54,7 @@ abstract class TestCase extends \Orchestra\Testbench\BrowserKit\TestCase
     protected function getPackageProviders($app): array
     {
         return [
-            HCScriptsServiceProvider::class,
+            HCWalletServiceProvider::class,
         ];
     }
 
