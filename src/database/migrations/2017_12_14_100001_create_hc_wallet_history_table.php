@@ -23,10 +23,12 @@ class CreateHcWalletHistoryTable extends Migration
             $table->double('balance', 10, 6);
             $table->double('amount', 10, 6)->unsigned();
             $table->enum('action', ['increased', 'decreased', 'reserved']);
+            $table->string('user_id', 36)->nullable();
             $table->string('triggerable_id', 36)->nullable();
             $table->string('triggerable_type')->nullable();
 
             $table->foreign('wallet_id')->references('id')->on('hc_wallet')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign('user_id')->references('id')->on('hc_users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
         });
     }
 

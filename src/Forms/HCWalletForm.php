@@ -58,8 +58,15 @@ class HCWalletForm
             'structure' => [
                 [
                     "type" => "singleLine",
-                    "fieldID" => "user_id",
-                    "label" => trans("HCWallet::wallet.user_id"),
+                    "fieldID" => "ownable_id",
+                    "label" => trans("HCWallet::wallet.ownable_id"),
+                    "required" => 1,
+                    "requiredVisible" => 1,
+                ],
+                [
+                    "type" => "singleLine",
+                    "fieldID" => "ownable_type",
+                    "label" => trans("HCWallet::wallet.ownable_type"),
                     "required" => 1,
                     "requiredVisible" => 1,
                 ],

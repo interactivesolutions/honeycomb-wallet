@@ -47,7 +47,6 @@ class HCWalletController extends HCBaseController
      * Returning configured admin view
      *
      * @return View
-     * @throws \Illuminate\Container\EntryNotFoundException
      */
     public function adminIndex(): View
     {
@@ -87,9 +86,13 @@ class HCWalletController extends HCBaseController
     public function getAdminListHeader(): array
     {
         return [
-            'user_id' => [
+            'ownable_id' => [
                 "type" => "text",
-                "label" => trans('HCWallet::wallet.user_id'),
+                "label" => trans('HCWallet::wallet.ownable_id'),
+            ],
+            'ownable_type' => [
+                "type" => "text",
+                "label" => trans('HCWallet::wallet.ownable_type'),
             ],
             'balance' => [
                 "type" => "text",
@@ -150,7 +153,8 @@ class HCWalletController extends HCBaseController
             array_set($data, 'record.id', array_get($_data, 'id'));
         }
 
-        array_set($data, 'record.user_id', array_get($_data, 'user_id'));
+        array_set($data, 'record.ownable_id', array_get($_data, 'ownable_id'));
+        array_set($data, 'record.ownable_type', array_get($_data, 'ownable_type'));
         array_set($data, 'record.balance', array_get($_data, 'balance'));
         array_set($data, 'record.balance_debit', array_get($_data, 'balance_debit'));
 
@@ -283,7 +287,8 @@ class HCWalletController extends HCBaseController
     protected function searchQuery(Builder $query, string $phrase): Builder
     {
         return $query->where(function(Builder $query) use ($phrase) {
-            $query->where('user_id', 'LIKE', '%' . $phrase . '%')
+            $query->where('ownable_id', 'LIKE', '%' . $phrase . '%')
+                ->orWhere('ownable_type', 'LIKE', '%' . $phrase . '%')
                 ->orWhere('balance', 'LIKE', '%' . $phrase . '%')
                 ->orWhere('balance_debit', 'LIKE', '%' . $phrase . '%');
         });

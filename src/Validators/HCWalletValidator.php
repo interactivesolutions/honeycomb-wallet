@@ -41,9 +41,10 @@ class HCWalletValidator extends HCCoreFormValidator
     protected function rules(): array
     {
         return [
-            'user_id' => 'required',
-            'balance' => 'required',
-            'balance_debit' => 'required',
+            'ownable_id' => 'required',
+            'ownable_type' => 'required',
+            'balance' => 'required|int',
+            'balance_debit' => 'required|int',
         ];
     }
 }

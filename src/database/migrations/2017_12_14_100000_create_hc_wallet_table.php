@@ -18,11 +18,13 @@ class CreateHcWalletTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->string('user_id', 36);
+            $table->string('ownable_id', 36);
+            $table->string('ownable_type');
+
             $table->double('balance', 10, 6);
             $table->double('balance_debit', 10, 6)->unsigned();
 
-            $table->foreign('user_id')->references('id')->on('hc_companies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->unique(['ownable_id', 'ownable_type']);
         });
     }
 

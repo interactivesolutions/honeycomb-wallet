@@ -30,6 +30,7 @@ declare(strict_types = 1);
 namespace InteractiveSolutions\HoneycombWallet\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use InteractiveSolutions\HoneycombCore\Models\HCUuidModel;
 use Tests\Feature\Repositories\HCUser;
 
@@ -47,7 +48,7 @@ class HCWallet extends HCUuidModel
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'balance', 'balance_debit'];
+    protected $fillable = ['id', 'ownable_id', 'ownable_type', 'balance', 'balance_debit'];
 
     /**
      * @return BelongsTo
@@ -55,5 +56,15 @@ class HCWallet extends HCUuidModel
     public function user(): BelongsTo
     {
         return $this->belongsTo(HCUser::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get all of the owning ownable models.
+     *
+     * @return MorphTo
+     */
+    public function ownable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

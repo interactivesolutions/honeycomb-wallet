@@ -48,59 +48,73 @@ class HCWalletHistoryForm
     {
         $form = [
             'storageURL' => route('admin.api.routes.wallet.history'),
-            'buttons'    => [
+            'buttons' => [
                 [
                     "class" => "col-centered",
                     "label" => trans('HCTranslations::core.buttons.submit'),
-                    "type"  => "submit",
+                    "type" => "submit",
                 ],
             ],
-            'structure'  => [
+            'structure' => [
                 [
-    "type"            => "singleLine",
-    "fieldID"         => "wallet_id",
-    "label"           => trans("HCWallet::wallet_history.wallet_id"),
-    "required"        => 1,
-    "requiredVisible" => 1,
-],[
-    "type"            => "singleLine",
-    "fieldID"         => "balance",
-    "label"           => trans("HCWallet::wallet_history.balance"),
-    "required"        => 1,
-    "requiredVisible" => 1,
-],[
-    "type"            => "singleLine",
-    "fieldID"         => "amount",
-    "label"           => trans("HCWallet::wallet_history.amount"),
-    "required"        => 1,
-    "requiredVisible" => 1,
-],[
-    "type"            => "singleLine",
-    "fieldID"         => "action",
-    "label"           => trans("HCWallet::wallet_history.action"),
-    "required"        => 1,
-    "requiredVisible" => 1,
-],[
-    "type"            => "singleLine",
-    "fieldID"         => "triggerable_id",
-    "label"           => trans("HCWallet::wallet_history.triggerable_id"),
-    "required"        => 0,
-    "requiredVisible" => 0,
-],[
-    "type"            => "singleLine",
-    "fieldID"         => "triggerable_type",
-    "label"           => trans("HCWallet::wallet_history.triggerable_type"),
-    "required"        => 0,
-    "requiredVisible" => 0,
-],
+                    "type" => "singleLine",
+                    "fieldID" => "wallet_id",
+                    "label" => trans("HCWallet::wallet_history.wallet_id"),
+                    "required" => 1,
+                    "requiredVisible" => 1,
+                ],
+                [
+                    "type" => "singleLine",
+                    "fieldID" => "balance",
+                    "label" => trans("HCWallet::wallet_history.balance"),
+                    "required" => 1,
+                    "requiredVisible" => 1,
+                ],
+                [
+                    "type" => "singleLine",
+                    "fieldID" => "amount",
+                    "label" => trans("HCWallet::wallet_history.amount"),
+                    "required" => 1,
+                    "requiredVisible" => 1,
+                ],
+                [
+                    "type" => "singleLine",
+                    "fieldID" => "action",
+                    "label" => trans("HCWallet::wallet_history.action"),
+                    "required" => 1,
+                    "requiredVisible" => 1,
+                ],
+                [
+                    "type" => "singleLine",
+                    "fieldID" => "user_id",
+                    "label" => trans("HCWallet::wallet_history.user_id"),
+                    "required" => 1,
+                    "requiredVisible" => 1,
+                ],
+                [
+                    "type" => "singleLine",
+                    "fieldID" => "triggerable_id",
+                    "label" => trans("HCWallet::wallet_history.triggerable_id"),
+                    "required" => 0,
+                    "requiredVisible" => 0,
+                ],
+                [
+                    "type" => "singleLine",
+                    "fieldID" => "triggerable_type",
+                    "label" => trans("HCWallet::wallet_history.triggerable_type"),
+                    "required" => 0,
+                    "requiredVisible" => 0,
+                ],
             ],
         ];
 
-        if ($this->multiLanguage)
+        if ($this->multiLanguage) {
             $form['availableLanguages'] = getHCContentLanguages();
+        }
 
-        if (!$edit)
+        if (!$edit) {
             return $form;
+        }
 
         //Make changes to edit form if needed
         // $form['structure'][] = [];

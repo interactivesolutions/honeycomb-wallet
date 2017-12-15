@@ -19,7 +19,8 @@
             "translation": "HCWallet::wallet_history.page_title",
             "icon": "fa-circle-o",
             "aclPermission": "interactivesolutions_honeycomb_wallet_routes_wallet_history_list",
-            "priority": 10
+            "priority": 10,
+            "parent": "admin.routes.wallet.index"
         }
     ],
     "acl": {

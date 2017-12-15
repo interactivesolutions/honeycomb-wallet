@@ -47,34 +47,33 @@ class HCWalletHistoryController extends HCBaseController
      * Returning configured admin view
      *
      * @return View
-     * @throws \Illuminate\Container\EntryNotFoundException
      */
     public function adminIndex(): View
     {
         $config = [
-            'title'       => trans('HCWallet::wallet_history.page_title'),
-            'listURL'     => route('admin.api.routes.wallet.history'),
-            'newFormUrl'  => route('admin.api.form-manager', ['wallet-history-new']),
+            'title' => trans('HCWallet::wallet_history.page_title'),
+            'listURL' => route('admin.api.routes.wallet.history'),
+            'newFormUrl' => route('admin.api.form-manager', ['wallet-history-new']),
             'editFormUrl' => route('admin.api.form-manager', ['wallet-history-edit']),
-            'imagesUrl'   => route('resource.get', ['/']),
-            'headers'     => $this->getAdminListHeader(),
+            'imagesUrl' => route('resource.get', ['/']),
+            'headers' => $this->getAdminListHeader(),
         ];
 
-        if (auth()->user()->can('interactivesolutions_honeycomb_wallet_routes_wallet_history_create')) {
-            $config['actions'][] = 'new';
-        }
-
-        if (auth()->user()->can('interactivesolutions_honeycomb_wallet_routes_wallet_history_update')) {
-            $config['actions'][] = 'update';
-            $config['actions'][] = 'restore';
-        }
-
-        if (auth()->user()->can('interactivesolutions_honeycomb_wallet_routes_wallet_history_delete')) {
-            $config['actions'][] = 'delete';
-        }
+//        if (auth()->user()->can('interactivesolutions_honeycomb_wallet_routes_wallet_history_create')) {
+//            $config['actions'][] = 'new';
+//        }
+//
+//        if (auth()->user()->can('interactivesolutions_honeycomb_wallet_routes_wallet_history_update')) {
+//            $config['actions'][] = 'update';
+//            $config['actions'][] = 'restore';
+//        }
+//
+//        if (auth()->user()->can('interactivesolutions_honeycomb_wallet_routes_wallet_history_delete')) {
+//            $config['actions'][] = 'delete';
+//        }
 
         $config['actions'][] = 'search';
-        $config['filters'] = $this->getFilters ();
+        $config['filters'] = $this->getFilters();
 
         return hcview('HCCoreUI::admin.content.list', ['config' => $config]);
     }
@@ -87,30 +86,34 @@ class HCWalletHistoryController extends HCBaseController
     public function getAdminListHeader(): array
     {
         return [
-            'wallet_id'     => [
-    "type"  => "text",
-    "label" => trans('HCWallet::wallet_history.wallet_id'),
-],
-'balance'     => [
-    "type"  => "text",
-    "label" => trans('HCWallet::wallet_history.balance'),
-],
-'amount'     => [
-    "type"  => "text",
-    "label" => trans('HCWallet::wallet_history.amount'),
-],
-'action'     => [
-    "type"  => "text",
-    "label" => trans('HCWallet::wallet_history.action'),
-],
-'triggerable_id'     => [
-    "type"  => "text",
-    "label" => trans('HCWallet::wallet_history.triggerable_id'),
-],
-'triggerable_type'     => [
-    "type"  => "text",
-    "label" => trans('HCWallet::wallet_history.triggerable_type'),
-],
+            'wallet_id' => [
+                "type" => "text",
+                "label" => trans('HCWallet::wallet_history.wallet_id'),
+            ],
+            'balance' => [
+                "type" => "text",
+                "label" => trans('HCWallet::wallet_history.balance'),
+            ],
+            'amount' => [
+                "type" => "text",
+                "label" => trans('HCWallet::wallet_history.amount'),
+            ],
+            'action' => [
+                "type" => "text",
+                "label" => trans('HCWallet::wallet_history.action'),
+            ],
+            'user.email' => [
+                "type" => "text",
+                "label" => trans('HCWallet::wallet_history.user_id'),
+            ],
+            'triggerable_id' => [
+                "type" => "text",
+                "label" => trans('HCWallet::wallet_history.triggerable_id'),
+            ],
+            'triggerable_type' => [
+                "type" => "text",
+                "label" => trans('HCWallet::wallet_history.triggerable_type'),
+            ],
 
         ];
     }
@@ -151,6 +154,7 @@ class HCWalletHistoryController extends HCBaseController
      * Getting user data on POST call
      *
      * @return mixed
+     * @throws \Exception
      */
     protected function getInputData(): array
     {
@@ -158,20 +162,22 @@ class HCWalletHistoryController extends HCBaseController
 
         $_data = request()->all();
 
-        if (array_has($_data, 'id'))
-            array_set ($data, 'record.id', array_get ($_data, 'id'));
+        if (array_has($_data, 'id')) {
+            array_set($data, 'record.id', array_get($_data, 'id'));
+        }
 
         array_set($data, 'record.wallet_id', array_get($_data, 'wallet_id'));
-array_set($data, 'record.balance', array_get($_data, 'balance'));
-array_set($data, 'record.amount', array_get($_data, 'amount'));
-array_set($data, 'record.action', array_get($_data, 'action'));
-array_set($data, 'record.triggerable_id', array_get($_data, 'triggerable_id'));
-array_set($data, 'record.triggerable_type', array_get($_data, 'triggerable_type'));
+        array_set($data, 'record.balance', array_get($_data, 'balance'));
+        array_set($data, 'record.amount', array_get($_data, 'amount'));
+        array_set($data, 'record.action', array_get($_data, 'action'));
+        array_set($data, 'record.user_id', array_get($_data, 'user_id'));
+        array_set($data, 'record.triggerable_id', array_get($_data, 'triggerable_id'));
+        array_set($data, 'record.triggerable_type', array_get($_data, 'triggerable_type'));
 
         return makeEmptyNullable($data);
     }
 
-        /**
+    /**
      * Create item
      *
      * @return mixed
@@ -264,16 +270,17 @@ array_set($data, 'record.triggerable_type', array_get($_data, 'triggerable_type'
      */
     protected function createQuery(array $select = null)
     {
-        $with = [];
+        $with = ['user'];
 
-        if ($select == null)
+        if ($select == null) {
             $select = HCWalletHistory::getFillableFields();
+        }
 
         $list = HCWalletHistory::with($with)->select($select)
-        // add filters
-        ->where(function ($query) use ($select) {
-            $query = $this->getRequestParameters($query, $select);
-        });
+            // add filters
+            ->where(function($query) use ($select) {
+                $query = $this->getRequestParameters($query, $select);
+            });
 
         // enabling check for deleted
         $list = $this->checkForDeleted($list);
@@ -295,15 +302,15 @@ array_set($data, 'record.triggerable_type', array_get($_data, 'triggerable_type'
      */
     protected function searchQuery(Builder $query, string $phrase): Builder
     {
-        return $query->where (function (Builder $query) use ($phrase) {
-                $query->where('wallet_id', 'LIKE', '%' . $phrase . '%')
-->orWhere('balance', 'LIKE', '%' . $phrase . '%')
-->orWhere('amount', 'LIKE', '%' . $phrase . '%')
-->orWhere('action', 'LIKE', '%' . $phrase . '%')
-->orWhere('triggerable_id', 'LIKE', '%' . $phrase . '%')
-->orWhere('triggerable_type', 'LIKE', '%' . $phrase . '%')
-;
-             });
+        return $query->where(function(Builder $query) use ($phrase) {
+            $query->where('wallet_id', 'LIKE', '%' . $phrase . '%')
+                ->orWhere('balance', 'LIKE', '%' . $phrase . '%')
+                ->orWhere('amount', 'LIKE', '%' . $phrase . '%')
+                ->orWhere('action', 'LIKE', '%' . $phrase . '%')
+                ->orWhere('user_id', 'LIKE', '%' . $phrase . '%')
+                ->orWhere('triggerable_id', 'LIKE', '%' . $phrase . '%')
+                ->orWhere('triggerable_type', 'LIKE', '%' . $phrase . '%');
+        });
     }
 
 }

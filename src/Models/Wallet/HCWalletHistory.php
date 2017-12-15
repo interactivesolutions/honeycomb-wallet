@@ -29,6 +29,9 @@ declare(strict_types = 1);
 
 namespace InteractiveSolutions\HoneycombWallet\Models\Wallet;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use InteractiveSolutions\HoneycombAcl\Models\HCUsers;
 use InteractiveSolutions\HoneycombCore\Models\HCUuidModel;
 
 class HCWalletHistory extends HCUuidModel
@@ -45,5 +48,30 @@ class HCWalletHistory extends HCUuidModel
      *
      * @var array
      */
-    protected $fillable = ['id', 'wallet_id', 'balance', 'amount', 'action', 'triggerable_id', 'triggerable_type'];
+    protected $fillable = [
+        'id',
+        'wallet_id',
+        'balance',
+        'amount',
+        'action',
+        'user_id',
+        'triggerable_id',
+        'triggerable_type',
+    ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(HCUsers::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return MorphTo
+     */
+    public function triggerable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }
