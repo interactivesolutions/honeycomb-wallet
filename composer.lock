@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c860eb310ac7dfc7cb456e5af5c47d39",
+    "content-hash": "febcbe2dd938f51fbb375c35d715eed6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -585,6 +585,251 @@
             "time": "2017-11-14T20:44:03+00:00"
         },
         {
+            "name": "guzzlehttp/guzzle",
+            "version": "6.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f4db5a78a5ea468d4831de7f0bf9d9415e348699",
+                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/promises": "^1.0",
+                "guzzlehttp/psr7": "^1.4",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "psr/log": "^1.0"
+            },
+            "suggest": {
+                "psr/log": "Required for using the Log middleware"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.2-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "time": "2017-06-22T18:50:49+00:00"
+        },
+        {
+            "name": "guzzlehttp/promises",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/promises.git",
+                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle promises library",
+            "keywords": [
+                "promise"
+            ],
+            "time": "2016-12-20T10:07:11+00:00"
+        },
+        {
+            "name": "guzzlehttp/psr7",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/psr7.git",
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "psr/http-message": "~1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "homepage": "https://github.com/Tobion"
+                }
+            ],
+            "description": "PSR-7 message implementation that also provides common utility methods",
+            "keywords": [
+                "http",
+                "message",
+                "request",
+                "response",
+                "stream",
+                "uri",
+                "url"
+            ],
+            "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "interactivesolutions/honeycomb-acl",
+            "version": "v1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/interactivesolutions/honeycomb-acl.git",
+                "reference": "ea82afbf34212e6a6988c07444cf8ab616373487"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/interactivesolutions/honeycomb-acl/zipball/ea82afbf34212e6a6988c07444cf8ab616373487",
+                "reference": "ea82afbf34212e6a6988c07444cf8ab616373487",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3",
+                "interactivesolutions/honeycomb-core": "~1.1.0",
+                "interactivesolutions/honeycomb-languages": "~1.1.0",
+                "interactivesolutions/honeycomb-scripts": "~1.1.0",
+                "laravel/framework": "^5.5",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "brianium/paratest": "^1.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench-browser-kit": "^3.5",
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "InteractiveSolutions\\HoneycombAcl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vytautas Rimeikis",
+                    "email": "vytautas.rimeikis@gmail.com"
+                },
+                {
+                    "name": "Jevgenij Dmitrijev",
+                    "email": "jd@interactivesolutions.lt"
+                }
+            ],
+            "description": "HoneyComb access control list (ACL) package for users permissions and authentication.",
+            "homepage": "https://github.com/interactivesolutions/honeycomb-acl/",
+            "keywords": [
+                "Authentication",
+                "Users",
+                "access",
+                "acl",
+                "control",
+                "control list",
+                "honeycomb",
+                "laravel",
+                "package",
+                "permissions"
+            ],
+            "time": "2017-11-14T13:55:56+00:00"
+        },
+        {
             "name": "interactivesolutions/honeycomb-core",
             "version": "v1.1.7",
             "source": {
@@ -644,6 +889,143 @@
                 "laravel"
             ],
             "time": "2017-12-06T07:17:09+00:00"
+        },
+        {
+            "name": "interactivesolutions/honeycomb-languages",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/interactivesolutions/honeycomb-languages.git",
+                "reference": "941763e8ea2ab9f1c73888307833e5cb4b5996a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/interactivesolutions/honeycomb-languages/zipball/941763e8ea2ab9f1c73888307833e5cb4b5996a6",
+                "reference": "941763e8ea2ab9f1c73888307833e5cb4b5996a6",
+                "shasum": ""
+            },
+            "require": {
+                "interactivesolutions/honeycomb-core": "~1.1.0",
+                "laravel/framework": "^5.5",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "brianium/paratest": "^1.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench-browser-kit": "^3.5",
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "interactivesolutions\\honeycomblanguages\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vytautas Rimeikis",
+                    "email": "vytautas.rimeikis@gmail.com"
+                },
+                {
+                    "name": "Jevgenij Dmitrijev",
+                    "email": "jd@interactivesolutions.lt"
+                },
+                {
+                    "name": "Mantas Gelčius",
+                    "email": "mantas.gelcius@gmail.com"
+                },
+                {
+                    "name": "Liutauras Kavaliauskas",
+                    "email": "liutauraskav@gmail.com"
+                }
+            ],
+            "description": "HoneyComb languages package. Information about languages arround the world. (Language family, language, native name, iso codes). Availability to select language for front end, back end, conttent.",
+            "homepage": "https://github.com/interactivesolutions/honeycomb-languages/",
+            "keywords": [
+                "ISO codes",
+                "back end language",
+                "content language",
+                "front end language",
+                "honeycomb",
+                "information",
+                "language",
+                "language family",
+                "languages",
+                "native name",
+                "package",
+                "world languages"
+            ],
+            "time": "2017-12-06T08:35:13+00:00"
+        },
+        {
+            "name": "interactivesolutions/honeycomb-scripts",
+            "version": "v1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/interactivesolutions/honeycomb-scripts.git",
+                "reference": "b91527cf245074bbb4ad30b34935c0a965bf12f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/interactivesolutions/honeycomb-scripts/zipball/b91527cf245074bbb4ad30b34935c0a965bf12f2",
+                "reference": "b91527cf245074bbb4ad30b34935c0a965bf12f2",
+                "shasum": ""
+            },
+            "require": {
+                "interactivesolutions/honeycomb-core": "~1.1.0",
+                "interactivesolutions/honeycomb-languages": "~1.1.0",
+                "laravel/framework": "^5.5",
+                "nette/reflection": "^2.4",
+                "php": ">=7.1",
+                "xethron/migrations-generator": "^2.0"
+            },
+            "require-dev": {
+                "brianium/paratest": "^1.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench-browser-kit": "^3.5",
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "InteractiveSolutions\\HoneycombScripts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vytautas Rimeikis",
+                    "email": "vytautas.rimeikis@gmail.com"
+                },
+                {
+                    "name": "Jevgenij Dmitrijev",
+                    "email": "jd@interactivesolutions.lt"
+                },
+                {
+                    "name": "Mantas Gelčius",
+                    "email": "mantas.gelcius@gmail.com"
+                },
+                {
+                    "name": "Liutauras Kavaliauskas",
+                    "email": "liutauraskav@gmail.com"
+                }
+            ],
+            "description": "HoneyComb CMS scripts package",
+            "keywords": [
+                "automation",
+                "honey",
+                "honeycomb",
+                "laravel",
+                "scripts"
+            ],
+            "time": "2017-12-06T08:55:23+00:00"
         },
         {
             "name": "jenssegers/rollbar",
@@ -1453,6 +1835,56 @@
                 "psr"
             ],
             "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "psr/log",

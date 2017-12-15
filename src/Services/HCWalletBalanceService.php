@@ -2,14 +2,16 @@
 
 namespace InteractiveSolutions\HoneycombWallet\Services;
 
+use Illuminate\Container\EntryNotFoundException;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use InteractiveSolutions\HoneycombWallet\Exceptions\WalletNotEnoughBalanceException;
 use InteractiveSolutions\HoneycombWallet\Models\HCWallet;
 use InteractiveSolutions\HoneycombWallet\Repositories\HCWalletHistoryRepository;
 use InteractiveSolutions\HoneycombWallet\Repositories\HCWalletRepository;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 
 /**
- * Class WalletBalanceService
+ * Class HCWalletBalanceService
  * @package InteractiveSolutions\HoneycombWallet\Services
  */
 class HCWalletBalanceService
@@ -24,7 +26,7 @@ class HCWalletBalanceService
     private $historyRepository;
 
     /**
-     * WalletBalanceService constructor.
+     * HCWalletBalanceService constructor.
      * @param HCWalletRepository $walletRepository
      * @param HCWalletHistoryRepository $historyRepository
      */
@@ -44,7 +46,7 @@ class HCWalletBalanceService
      * @param string $triggerType
      * @return array
      * @throws BindingResolutionException
-     * @throws Exception
+     * @throws EntryNotFoundException
      */
     public function increase(float $amount, string $id, string $model, string $triggerId, string $triggerType): array
     {
@@ -56,7 +58,7 @@ class HCWalletBalanceService
 
         $history = $this->createHistory($amount, $triggerId, $triggerType, $wallet);
 
-        return ['success' => true, 'data' => $wallet, 'history' => $history];
+        return ['success' => true, 'wallet' => $wallet, 'history' => $history];
     }
 
     /**
@@ -69,6 +71,7 @@ class HCWalletBalanceService
      * @param string $triggerType
      * @return array
      * @throws BindingResolutionException
+     * @throws EntryNotFoundException
      */
     public function decrease(float $amount, string $id, string $model, string $triggerId, string $triggerType): array
     {
@@ -83,7 +86,7 @@ class HCWalletBalanceService
 
         $history = $this->createHistory($amount, $triggerId, $triggerType, $wallet);
 
-        return ['success' => true, 'data' => $wallet, 'history' => $history];
+        return ['success' => true, 'wallet' => $wallet, 'history' => $history];
     }
 
     /**
@@ -96,7 +99,7 @@ class HCWalletBalanceService
      * @param string $triggerType
      * @return array
      * @throws BindingResolutionException
-     * @throws Exception
+     * @throws EntryNotFoundException
      */
     public function reserve(float $amount, string $id, string $model, string $triggerId, string $triggerType): array
     {
@@ -111,7 +114,7 @@ class HCWalletBalanceService
 
         $history = $this->createHistory($amount, $triggerId, $triggerType, $wallet);
 
-        return ['success' => true, 'data' => $wallet, 'history' => $history];
+        return ['success' => true, 'wallet' => $wallet, 'history' => $history];
     }
 
     /**
@@ -119,13 +122,14 @@ class HCWalletBalanceService
      * @param float $amount
      * @param float $debitBalance
      * @return float
+     * @throws \Exception
      */
     private function getCalculatedBalance(float $balance, float $amount, float $debitBalance): float
     {
         $balance = $balance + $amount;
 
         if ($balance < -abs($debitBalance)) {
-            throw new Exception(trans('ocv3payments::wallet.errors.not_enough_balance', [
+            throw new WalletNotEnoughBalanceException(trans('ocv3payments::wallet.errors.not_enough_balance', [
                 'balance' => $balance,
                 'amount' => abs($amount),
             ]));
@@ -141,6 +145,7 @@ class HCWalletBalanceService
      * @param string $model
      * @return HCWallet
      * @throws BindingResolutionException
+     * @throws EntryNotFoundException
      */
     private function getWallet(string $id, string $model): HCWallet
     {
@@ -163,13 +168,15 @@ class HCWalletBalanceService
      * @param float $amount
      * @param string $triggerId
      * @param string $triggerType
-     * @param float $balance
+     * @param HCWallet $wallet
      * @return mixed
+     * @throws BindingResolutionException
      */
-    private function createHistory(float $amount, string $triggerId, string $triggerType, float $balance)
+    private function createHistory(float $amount, string $triggerId, string $triggerType, HCWallet $wallet)
     {
         $history = $this->historyRepository->create([
-            'balance' => $balance,
+            'wallet_id' => $wallet->id,
+            'balance' => $wallet->balance,
             'amount' => $amount,
             'action' => 'increase',
             'user_id' => auth()->id(),

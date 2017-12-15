@@ -30,7 +30,12 @@ declare(strict_types = 1);
 namespace Tests;
 
 
+use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Foundation\Application;
+use InteractiveSolutions\HoneycombAcl\Providers\HCACLServiceProvider;
+use InteractiveSolutions\HoneycombCore\Providers\HCCoreServiceProvider;
+use interactivesolutions\honeycomblanguages\app\providers\HCLanguagesServiceProvider;
+use InteractiveSolutions\HoneycombScripts\app\providers\HCScriptsServiceProvider;
 use InteractiveSolutions\HoneycombWallet\Providers\HCWalletServiceProvider;
 
 /**
@@ -45,6 +50,9 @@ abstract class TestCase extends \Orchestra\Testbench\BrowserKit\TestCase
     protected function setUp()
     {
         parent::setUp();
+
+        $this->factory = $this->app->make(Factory::class);
+
     }
 
     /**
@@ -54,6 +62,10 @@ abstract class TestCase extends \Orchestra\Testbench\BrowserKit\TestCase
     protected function getPackageProviders($app): array
     {
         return [
+            HCCoreServiceProvider::class,
+            HCACLServiceProvider::class,
+            HCLanguagesServiceProvider::class,
+            HCScriptsServiceProvider::class,
             HCWalletServiceProvider::class,
         ];
     }
@@ -61,5 +73,9 @@ abstract class TestCase extends \Orchestra\Testbench\BrowserKit\TestCase
     protected function getEnvironmentSetUp($app)
     {
         parent::getEnvironmentSetUp($app);
+
+        config([
+            'wallet.debit_balance' => '0',
+        ]);
     }
 }
