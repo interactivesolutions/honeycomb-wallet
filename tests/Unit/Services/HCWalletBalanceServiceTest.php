@@ -114,18 +114,56 @@ class HCWalletBalanceServiceTest extends TestCase
     }
 
     /** @test */
-    public function it_must_return_success_when_decreasing_form_wallet_with_valid_amount()
+    public function it_must_return_success_when_decreasing_from_wallet_with_valid_amount()
     {
         $wallet = factory(HCWallet::class)->create(['balance' => 10]);
 
-        $response = $this->getServiceInstance()->decrease(5, $wallet->ownable_id, $wallet->ownable_type);
+        $reduceAmount = 5;
+
+        $response = $this->getServiceInstance()->decrease($reduceAmount, $wallet->ownable_id, $wallet->ownable_type);
 
         $this->assertTrue($response['success']);
 
-        $this->assertEquals(5, $response['wallet']->balance);
+        $this->assertEquals($reduceAmount, $response['wallet']->balance);
 
         $this->assertEquals(0, $response['wallet']->balance_debit);
     }
+
+    /** @test */
+    public function it_must_return_success_when_decreasing_from_wallet_with_valid_amount_and_with_balance_debit()
+    {
+        $wallet = factory(HCWallet::class)->create(['balance' => 0, 'balance_debit' => 20]);
+
+        $reduceAmount = 15;
+
+        $response = $this->getServiceInstance()->decrease($reduceAmount, $wallet->ownable_id, $wallet->ownable_type);
+
+        $this->assertTrue($response['success']);
+
+        $this->assertEquals($wallet->balance - $reduceAmount, $response['wallet']->balance);
+
+        $this->assertEquals(20, $response['wallet']->balance_debit);
+    }
+
+
+    /** @test */
+    public function it_must_return_success_when_increasing_balance_from_minus_balance()
+    {
+        $wallet = factory(HCWallet::class)->create(['balance' => -20, 'balance_debit' => 20]);
+
+        $increaseAmount = 15;
+
+        $response = $this->getServiceInstance()->increase($increaseAmount, $wallet->ownable_id, $wallet->ownable_type);
+
+        $this->assertTrue($response['success']);
+
+        $this->assertEquals($wallet->balance + $increaseAmount, $response['wallet']->balance);
+
+        $this->assertEquals(20, $response['wallet']->balance_debit);
+    }
+
+    // TODO add tests with wallet history
+
 
     /**
      * @return HCWalletBalanceService
