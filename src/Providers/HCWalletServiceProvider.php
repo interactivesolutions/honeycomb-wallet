@@ -31,9 +31,9 @@ namespace InteractiveSolutions\HoneycombWallet\Providers;
 
 use Illuminate\Routing\Router;
 use InteractiveSolutions\HoneycombCore\Providers\HCBaseServiceProvider;
-use InteractiveSolutions\HoneycombWallet\Repositories\WalletHistoryRepository;
-use InteractiveSolutions\HoneycombWallet\Repositories\WalletRepository;
-use InteractiveSolutions\HoneycombWallet\Services\WalletBalanceService;
+use InteractiveSolutions\HoneycombWallet\Repositories\HCWalletHistoryRepository;
+use InteractiveSolutions\HoneycombWallet\Repositories\HCWalletRepository;
+use InteractiveSolutions\HoneycombWallet\Services\HCWalletBalanceService;
 
 /**
  * Class HCWalletServiceProvider
@@ -136,8 +136,8 @@ class HCWalletServiceProvider extends HCBaseServiceProvider
      */
     private function registerRepositories()
     {
-        $this->app->singleton(WalletRepository::class);
-        $this->app->singleton(WalletHistoryRepository::class);
+        $this->app->singleton(HCWalletRepository::class);
+        $this->app->singleton(HCWalletHistoryRepository::class);
     }
 
     /**
@@ -145,6 +145,6 @@ class HCWalletServiceProvider extends HCBaseServiceProvider
      */
     private function registerServices()
     {
-        $this->app->singleton(WalletBalanceService::class);
+        $this->app->singleton(HCWalletBalanceService::class);
     }
 }

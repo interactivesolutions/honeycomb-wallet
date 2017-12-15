@@ -4,31 +4,31 @@ namespace InteractiveSolutions\HoneycombWallet\Services;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InteractiveSolutions\HoneycombWallet\Models\HCWallet;
-use InteractiveSolutions\HoneycombWallet\Repositories\WalletHistoryRepository;
-use InteractiveSolutions\HoneycombWallet\Repositories\WalletRepository;
+use InteractiveSolutions\HoneycombWallet\Repositories\HCWalletHistoryRepository;
+use InteractiveSolutions\HoneycombWallet\Repositories\HCWalletRepository;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 
 /**
  * Class WalletBalanceService
  * @package InteractiveSolutions\HoneycombWallet\Services
  */
-class WalletBalanceService
+class HCWalletBalanceService
 {
     /**
-     * @var WalletRepository
+     * @var HCWalletRepository
      */
     private $walletRepository;
     /**
-     * @var WalletHistoryRepository
+     * @var HCWalletHistoryRepository
      */
     private $historyRepository;
 
     /**
      * WalletBalanceService constructor.
-     * @param WalletRepository $walletRepository
-     * @param WalletHistoryRepository $historyRepository
+     * @param HCWalletRepository $walletRepository
+     * @param HCWalletHistoryRepository $historyRepository
      */
-    public function __construct(WalletRepository $walletRepository, WalletHistoryRepository $historyRepository)
+    public function __construct(HCWalletRepository $walletRepository, HCWalletHistoryRepository $historyRepository)
     {
         $this->walletRepository = $walletRepository;
         $this->historyRepository = $historyRepository;

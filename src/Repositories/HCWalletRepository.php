@@ -3,15 +3,15 @@
 namespace InteractiveSolutions\HoneycombWallet\Repositories;
 
 use InteractiveSolutions\HoneycombCore\Repositories\Repository;
-use InteractiveSolutions\HoneycombWallet\Models\Wallet\HCWalletHistory;
+use InteractiveSolutions\HoneycombWallet\Models\HCWallet;
 
-class WalletHistoryRepository extends Repository
+class HCWalletRepository extends Repository
 {
     /**
      * @return string
      */
     public function model(): string
     {
-        return HCWalletHistory::class;
+        return HCWallet::class;
     }
 }
