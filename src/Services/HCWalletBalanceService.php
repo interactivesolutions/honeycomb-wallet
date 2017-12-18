@@ -120,6 +120,10 @@ class HCWalletBalanceService
         return ['success' => true, 'wallet' => $wallet, 'history' => $history];
     }
 
+    // TODO wallet refund
+    // TODO wallet reservation cancel
+    // TODO wallet reservation confirm 
+
     /**
      * @param float $balance
      * @param float $amount
